@@ -1,0 +1,6 @@
+/* pages/my/about_us/about_us.wxss */
+
+.container {
+    width: 627rpx;
+    margin: 57rpx auto 0;
+}

@@ -1,0 +1,18 @@
+/* components/Header/Header.wxss */
+
+.statusBar {
+    top: 0;
+}
+
+.statusBar, .header {
+    position: fixed;
+    display: inline-block;
+    z-index: 999;
+    width: 100vw;
+}
+
+
+.header {
+    text-indent: 60rpx;
+    font-weight: bold;
+}

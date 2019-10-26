@@ -1,0 +1,25 @@
+<!-- pages/my/order_manage/order_details/order_feedback/order_feedback.wxml -->
+<view class="wrapper">
+    <view class="order-feedback">
+        <view class="title-box">
+            <text class="title-name fs28">{{order_details.code}}</text>
+            <text class="title-time fs24">{{order_details.addtime}}</text>
+        </view>
+        <view class="option-item first fs24">
+            <view class="option-name">反馈意见:</view>
+            <view class="content" style="flex: 1">
+                <textarea bindinput="savaValue" maxlength="200" class="feedback-textarea" placeholder="请输入反馈意见"></textarea>
+                <view class="tips text-right">(0/200)</view>
+            </view>
+        </view>
+        <view class="option-item fs24">
+            <view class="option-name">反馈图片:</view>
+            <view style="margin-left: 21rpx;">
+                <image wx:for="{{uploadImagePath}}" wx:key="index" src="{{item.url}}" class="uploadPicture" />
+                <image wx:if="{{uploadImagePath.length < 2}}" bindtap="uploadPicture" class="icon-uploadPicture" src="../../../../../images/icon-uploadPicture.png" />
+                <view class="count fs20">最多只能上传两张图片</view>
+            </view>
+        </view>
+    </view>
+    <view bindtap="submitFeedback" hover-class="hover-view" class="feedback-btn white_color text-center">提交反馈</view>
+</view>

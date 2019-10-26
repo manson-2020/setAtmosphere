@@ -1,0 +1,21 @@
+{
+  "pages": [
+    
+    "pages/index/index",
+    "pages/my/my",
+   
+    "pages/my/order_manage/order_details/detailed_pictures/detailed_pictures",
+    "pages/my/personal_data/personal_data",
+    "pages/my/order_manage/order_manage",
+    "pages/orderInfo/orderInfo",
+    "pages/my/order_manage/order_details/order_feedback/order_feedback",
+    "pages/my/order_manage/order_details/order_details",
+    "pages/my/about_us/about_us"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

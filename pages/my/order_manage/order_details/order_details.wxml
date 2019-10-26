@@ -1,0 +1,51 @@
+<!-- pages/my/order_manage/order_details/order_details.wxml -->
+<view class="container">
+    <view class="header white_color">
+        <view class="header-title fs36">
+            <text>已付款</text>
+            <text class="ml70">{{order_details.code}}</text>
+        </view>
+        <view class="fs26 mt38">{{order_details.addtime}}</view>
+    </view>
+    <view class="address">
+        <image class="icon-position" src="../../../../images/icon-position.png" />
+        <view class="address-text fs24">{{order_details.address}}</view>
+    </view>
+    <view class="main">
+        <view class="main-item main-title fs28">{{order_details.name}}</view>
+        <navigator url="detailed_pictures/detailed_pictures?orderid={{orderid}}" class="main-item fs20">
+            <image class="bg-preview" src="{{order_details.imgs[0].url}}" />
+            <view class="details">
+                <view class="start-time">活动开始时间：{{order_details.startime}}</view>
+                <view>
+                    <view class="reward text-right">打赏：{{order_details.tip}}  元</view>
+                    <view class="budget text-right">
+                        预算区间：{{order_details.minpay}} - {{order_details.maxpay}}  元
+                    </view>
+                </view>
+            </view>
+        </navigator>
+        <view class="main-item">
+            <text class="earnestMoney fs24">定金</text>
+            <text class="earnestMoney fs28">{{order_details.pay}}  元</text>
+        </view>
+        <view class="main-item fs24">
+            <text class="remarks">备注：</text>
+            <view style="flex: 1">
+                <textarea disabled="{{true}}" value="{{order_details.remark}}" class="remarks-textarea" maxlength="200" placeholder="暂无备注" placeholder-class="textarea-placeholder"></textarea>
+            </view>
+        </view>
+        <view class="main-item fs24">
+            <text class="remarks">需求：</text>
+            <view style="flex: 1">
+                <textarea disabled="{{true}}" value="{{order_details.needs}}" class="remarks-textarea" maxlength="200" placeholder="暂无大概需求" placeholder-class="textarea-placeholder"></textarea>
+            </view>
+        </view>
+    </view>
+    <view class="submit-btn fs32 text-center">
+        <navigator class="seeFeedback">查看反馈</navigator>
+        <navigator url="order_feedback/order_feedback?orderid={{order_details.orderid}}" class="submitFeedback white_color">
+            我要反馈
+        </navigator>
+    </view>
+</view>

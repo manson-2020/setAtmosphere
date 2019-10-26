@@ -1,0 +1,214 @@
+<!-- components/orderInfo.wxml -->
+<wxs module="common" src="../../utils/common.wxs"></wxs>
+<view class="container" bindtap="hideMenu">
+    <Header title="{{title}}" backgroundColor="#fff" />
+    <view class="main" style="margin-top: calc({{titleHeight+statusBarHeight}}px + 18rpx); min-height: calc(100vh - ({{titleHeight+statusBarHeight}}px + 18rpx))">
+        <view wx:if="{{showOption}}" class="option">
+            <view class="option-item">
+                <view class="key fs24">
+                    <text class="symbol">*</text>
+                    <text class="name">我要找：</text>
+                </view>
+                <view class="value">
+                    <checkbox-group bindchange="choose" class="checkbox-group fs26">
+                        <label wx:for="{{option}}" class="checkbox" wx:for-item="item" wx:key="index">
+                            <checkbox value="{{item}}" checked="{{common.isInclude(selectedOption, item)}}" />
+                            {{item}}
+                        </label>
+                        <label class="checkbox">
+                            <checkbox value="其他" checked="{{common.isInclude(selectedOption, '其他')}}" />
+                            其他
+                        </label>
+                    </checkbox-group>
+                    <input wx:if="{{hasOther}}" bindinput="savaValue" value="{{inputKeyword}}" data-type="inputKeyword" class="keyword fs24" placeholder="选择“其他”，请输入关键字" />
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item">
+                <view class="key fs24">
+                    <text class="symbol">*</text>
+                    <text class="name">活动开始时间：</text>
+                </view>
+                <view class="value fs26">
+                    <view class="value-box">
+                        <picker bindchange="savaValue" data-type="date" mode="date" start="{{date}}">
+                            <view class="picker">
+                                <text class="date">{{date}}</text>
+                                <image class="icon-down" src="../../images/icon-down.png" />
+                            </view>
+                        </picker>
+                        <picker mode="time" data-type="time" bindchange="savaValue">
+                            <view class="picker">
+                                <text class="time">{{time}}</text>
+                                <image class="icon-down" src="../../images/icon-down.png" />
+                            </view>
+                        </picker>
+                    </view>
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item flex-start">
+                <view class="key fs24">
+                    <text class="symbol">*</text>
+                    <text class="name">活动地址：</text>
+                </view>
+                <view class="value fs26">
+                    <view class="value-box">
+                        <picker mode="region" data-type="area" bindchange="savaValue">
+                            <view class="picker">
+                                <text class="area">{{area}}</text>
+                                <image class="icon-down" src="../../images/icon-down.png" />
+                            </view>
+                        </picker>
+                    </view>
+                    <input class="address fs26" bindinput="savaValue" value="{{inputAddress}}" data-type="inputAddress" placeholder="请填写详细地址" />
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item flex-start">
+                <view class="key fs24">
+                    <text class="symbol"></text>
+                    <text class="name">大概需求：</text>
+                </view>
+                <view class="value">
+                    <textarea show-confirm-bar="{{false}}" bindinput="savaValue" value="{{inputNeedDescription}}" data-type="inputNeedDescription" maxlength="200" class="summary fs24" placeholder="请输入你大概预期效果"></textarea>
+                    <view class="count text-right fs22">{{inputNeedDescriptionCount}}/200</view>
+                </view>
+            </view>
+            <view wx:if="{{title == '找氛围布置商家'}}" class="line" />
+            <view wx:if="{{title == '找氛围布置商家'}}" class="option-item">
+                <view class="key fs22">
+                    <text class="symbol"></text>
+                    <view class="name">大概需求：</view>
+                    <view class="name">（效果图）</view>
+                </view>
+                <view class="value">
+                    <image wx:for="{{uploadImagePath}}" wx:key="index" src="{{item.url}}" class="icon-uploadPicture" />
+                    <image wx:if="{{uploadImagePath.length < 2}}" bindtap="uploadPicture" src="../../images/icon-uploadPicture.png" class="icon-uploadPicture" />
+                    <view class="count fs20">最多只能上传两张图片</view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{!showOption}}" class="option">
+            <view class="option-item">
+                <view class="key fs24">
+                    <text class="symbol">*</text>
+                    <text class="name">价格预算区间：</text>
+                </view>
+                <view class="value">
+                    <view class="section fs26">
+                        <input type="number" bindinput="savaValue" value="{{inputMinpay}}" data-type="inputMinpay" class="number" placeholder="1000.00" />
+                        <text>—</text>
+                        <input type="number" class="number" bindinput="savaValue" value="{{inputMaxpay}}" data-type="inputMaxpay" placeholder="1500.00" />
+                        元
+                    </view>
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item">
+                <view class="key fs24">
+                    <text class="symbol"></text>
+                    <text class="name">打赏：</text>
+                </view>
+                <view class="value">
+                    <view class="value-box">
+                        <view class="money fs26">
+                            <input type="number" class="moneyNumber" bindinput="savaValue" value="{{inputReward}}" data-type="inputReward" placeholder="0.00" />
+                            <text style="margin-left: 12rpx;">元</text>
+                        </view>
+                        <view class="fs16 tips">
+                            <text class="division">|</text>
+                            <view class="tips">
+                                <image class="emoji-kiss" src="../../images/emoji-kiss.png" />
+                                <text>您可以对我们的服务进行打赏</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item">
+                <view class="key fs24">
+                    <text class="symbol"></text>
+                    <text class="name">定金：</text>
+                </view>
+                <view class="value fs26">
+                    <view class="value-box">
+                        <view class="money fs26">
+                            <text>{{money}}</text>
+                            <text>元</text>
+                        </view>
+                        <view class="fs16 tips">
+                            <text class="division">|</text>
+                            <text class="fs16 tips">提前支付定金可以更快被商家接单哦</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item">
+                <view class="key fs24">
+                    <text class="symbol">*</text>
+                    <text class="name">支付方式：</text>
+                </view>
+                <view class="value">
+                    <view class="value-box inline-block" catchtap="showMenu">
+                        <text class="fs26">{{paymethod}}</text>
+                        <image src="../../images/icon-down.png" class="icon-down" />
+                    </view>
+                    <view class="drop-down-menu {{showMenu && 'showMenu'}}">
+                        <view bindtap="selected" class="menu-item fs26">{{menu}}</view>
+                    </view>
+                </view>
+            </view>
+            <view class="line" />
+            <view class="option-item flex-start">
+                <view class="key fs24">
+                    <text class="symbol"></text>
+                    <text class="name">订单备注：</text>
+                </view>
+                <view class="value">
+                    <textarea wx:if="{{showModal}}" show-confirm-bar="{{false}}" bindinput="savaValue" value="{{inputRemark}}" data-type="inputRemark" maxlength="200" class="summary fs24" placeholder-class="textarea-placeholder" placeholder="请输入订单其他说明需求（如：参加人数、预约桌数等）"></textarea>
+                    <view class="count fs22 text-right">{{inputRemarkCount}}/200</view>
+                </view>
+            </view>
+        </view>
+        <view wx:if="{{!showOption}}" class="title-myInfo fs24">
+            <text class="symbol">*</text>
+            <text>我的信息</text>
+        </view>
+        <view wx:if="{{!showOption}}" bindtap="showModal" class="option-info">
+            <view wx:if="{{userInfo.username && userInfo.phone}}" style="display: flex; flex-direction: column;">
+                <view class="info">
+                    <view class="info-name fs28">姓名：{{userInfo.username}}</view>
+                    <view class="phone-number-wrapper">
+                        <image class="icon-tel" src="../../images/icon-tel.png" />
+                        <text class="phone-number fs24">{{userInfo.phone}}</text>
+                    </view>
+                </view>
+                <text wx:if="{{userInfo.address}}" class="address-text fs22 gray_color">
+                    地址：{{userInfo.address}}
+                </text>
+            </view>
+            <view wx:else class="info-tips">点击编辑个人信息</view>
+        </view>
+        <view class="btn-box">
+            <view class="navigator" hover-class="hover-view" hover-stay-time="50" data-type="previous" bindtap="goto">
+                <image class="icon-btn" src="../../images/icon-previous.png" />
+            </view>
+            <view class="navigator" hover-class="hover-view" hover-stay-time="50" data-type="next" bindtap="goto">
+                <image class="icon-btn" src="../../images/icon-{{showOption ? 'next': 'done'}}.png" />
+            </view>
+        </view>
+    </view>
+    <modal hidden="{{showModal}}" title="编辑个人信息" confirm-text="提交" cancel-text="取消" bindcancel="modalSubmit" bindconfirm="modalSubmit">
+        <label class="modal-item">
+            <text class="title-text">姓名：</text>
+            <input placeholder="请输入姓名" bindinput="savaValue" value="{{inputName}}" data-type="inputName" />
+        </label>
+        <label class="modal-item">
+            <text class="title-text">电话号码：</text>
+            <input type="number" placeholder="请输入电话号码" bindinput="savaValue" value="{{inputNumber}}" data-type="inputNumber" />
+        </label>
+    </modal>
+</view>

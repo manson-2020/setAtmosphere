@@ -1,0 +1,10 @@
+<!-- pages/my/order_manage/order_details/detailed_pictures/detailed_pictures.wxml -->
+<view class="container">
+    <view class="text-center">
+        <image class="preview-picture" src="{{imgSrc}}" />
+    </view>
+    <view class="btn">
+        <image bindtap="switchPicture" data-type="previous" class="icon-switch" src="../../../../../images/icon-left_previous.png" />
+        <image bindtap="switchPicture" data-type="next" class="icon-switch" src="../../../../../images/icon-right_next.png" />
+    </view>
+</view>

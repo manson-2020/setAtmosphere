@@ -1,0 +1,5 @@
+<!-- components/Header/Header.wxml -->
+<view style="height: {{statusBarHeight}}px;background-color: {{backgroundColor}};" class="statusBar"></view>
+<view class="header fs36" style="background-color: {{backgroundColor}};color: {{fontColor}};top: {{statusBarHeight}}px;height: {{titleHeight}}px; line-height: {{titleHeight}}px;">
+    {{title}}
+</view>

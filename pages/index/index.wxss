@@ -1,0 +1,107 @@
+/**index.wxss**/
+
+.statusBar {
+  top: 0;
+}
+
+.statusBar, .header {
+  position: fixed;
+  display: inline-block;
+  z-index: 999;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.navigator {
+  display: inline-block;
+  border-radius: 9rpx;
+  margin-left: 50rpx;
+  overflow: hidden;
+  box-shadow: 0 0 18rpx #aaa;
+  width: 100vw;
+  border-radius: 50%;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.swiper {
+  width: 660rpx;
+  height: 890rpx;
+  margin: 45rpx auto 0;
+  border-radius: 30rpx;
+  overflow: hidden;
+  box-shadow: 0 0 18rpx #333;
+}
+
+.swiper-item {
+  width: 100%;
+  height: 100%;
+  border-radius: 30rpx;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 21rpx;
+  width: 337rpx;
+  margin: 44rpx auto 0;
+}
+
+.dots .dot {
+  margin: 0 17rpx;
+  width: 69rpx;
+  height: 15rpx;
+  background: #BFBFBF;
+  border-radius: 10rpx;
+  transition: all .6s;
+}
+
+.dots .dot.active {
+  width: 97rpx;
+  height: 100%;
+  background: #006FFF;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 70rpx 0 50rpx 0;
+}
+
+.whiteBtn, .blueBtn {
+  width: 300rpx;
+  height: 93rpx;
+  line-height: 93rpx;
+  text-align: center;
+  border-radius: 25rpx;
+}
+
+.whiteBtn {
+  background: #fff;
+  box-shadow: 0 12rpx 12rpx #eee;
+}
+
+.blueBtn {
+  background: #006FFF;
+  margin-left: 22rpx;
+  box-shadow: 0 12rpx 12rpx #ccc;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  z-index: 99999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,33 @@
+<!-- pages/my/my.wxml -->
+<view class="container">
+    <view class="banner">
+        <Header title="我的" fontColor="#fff" backgroundColor="transparent" />
+        <view class="banner-main">
+            <image class="avatar" src="{{personal_data.avatar || '../../images/avatar.png'}}" />
+            <view class="user-text">
+                <view class="text-title fs34">{{personal_data.nickname}}</view>
+                <view class="text-describe fs20">{{personal_data.phone}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="main">
+        <view class="extension">
+            <view>
+                <view class="slogan white_color fs28">最合适的氛围就是和你一起</view>
+                <view class="mark fs18">昇动科技</view>
+            </view>
+        </view>
+        <view class="my-list">
+            <navigator wx:for="{{options}}" url="{{item.name}}/{{item.name}}" wx:key="*this.title" class="list-item">
+                <image class="icon-all" src="../../images/icon-{{item.name}}.png" />
+                <text class="list-name fs30">{{item.title}}</text>
+                <image class="icon-right" src="../../images/icon-right.png" />
+            </navigator>
+            <navigator open-type="navigateBack" class="list-item">
+                <image class="icon-all" src="../../images/icon-sign_out.png" />
+                <text class="list-name fs30">退出登录</text>
+                <image class="icon-right" src="../../images/icon-right.png" />
+            </navigator>
+        </view>
+    </view>
+</view>

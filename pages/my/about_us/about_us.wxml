@@ -1,0 +1,2 @@
+<!-- pages/my/about_us/about_us.wxml -->
+<view class="container fs26">{{about}}</view>

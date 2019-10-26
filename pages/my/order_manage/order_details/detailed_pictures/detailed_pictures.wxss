@@ -1,0 +1,21 @@
+/* pages/my/order_manage/order_details/detailed_pictures/detailed_pictures.wxss */
+
+.container {
+    margin-top: 88rpx;
+}
+
+.preview-picture {
+    width: 588rpx;
+    height: 763rpx;
+}
+
+.icon-switch {
+    width: 114rpx;
+    height: 114rpx;
+}
+
+.btn {
+    margin: 106rpx 57rpx 0;
+    display: flex;
+    justify-content: space-between;
+}

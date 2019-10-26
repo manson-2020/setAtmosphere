@@ -1,0 +1,58 @@
+<!-- pages/my/personal_data/personal_data.wxml -->
+<view class="container">
+    <view class="main">
+        <view class="item item-avatar">
+            <view class="item-title">
+                <image class="avatar" bindtap="uploadPicture" src="{{uploadImagePath.url || personal_data.avatar || '../../../images/avatar.png'}}" />
+            </view>
+            <text class="placeholder">点击头像进行上传</text>
+        </view>
+        <view class="item">
+            <text class="item-title">昵称：</text>
+            <input placeholder-class="input-placeholder" bindinput="savaValue" data-type="nickname" placeholder="请输入昵称" value="{{personal_data.nickname}}" />
+        </view>
+        <view class="item">
+            <text class="item-title">姓名：</text>
+            <input placeholder-class="input-placeholder" bindinput="savaValue" data-type="username" placeholder="请输入姓名" value="{{personal_data.username}}" />
+        </view>
+        <view class="item">
+            <text class="item-title">联系电话：</text>
+            <input placeholder-class="input-placeholder" bindinput="savaValue" data-type="phone" placeholder="请输入联系电话" value="{{personal_data.phone}}" />
+        </view>
+        <view class="item">
+            <text class="item-title">出生日期：</text>
+            <picker data-type="date" mode="date" bindchange="savaValue" data-type="birthday">
+                <view class="picker">
+                    <text class="date fs24">{{personal_data.birthday || "选择日期"}}</text>
+                    <image class="icon-down" src="../../../images/icon-down.png" />
+                </view>
+            </picker>
+        </view>
+        <view class="item">
+            <text class="item-title">性别：</text>
+            <radio-group class="radio-group fs24" bindchange="savaValue" data-type="sex">
+                <label class="radio-label">
+                    <radio value="1" checked="{{personal_data.sex == 1}}" />
+                    <text class="radio-text">男</text>
+                </label>
+                <label class="radio-label second">
+                    <radio value="0" checked="{{personal_data.sex == 0}}" />
+                    <text class="radio-text">女</text>
+                </label>
+            </radio-group>
+        </view>
+        <view class="item last">
+            <text class="item-title">常住地址：</text>
+            <view class="item-value">
+                <picker mode="region" bindchange="savaValue" data-type="area">
+                    <view class="picker">
+                        <text class="area fs24">{{personal_data.area}}</text>
+                        <image class="icon-down" src="../../../images/icon-down.png" />
+                    </view>
+                </picker>
+                <input class="address-input" value="{{personal_data.address}}" bindinput="savaValue" data-type="address" placeholder-class="input-placeholder" placeholder="详细地址" />
+            </view>
+        </view>
+    </view>
+    <view bindtap="savaSubmit" class="savaBtn fs34 white_color text-center">保存</view>
+</view>

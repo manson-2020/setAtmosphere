@@ -1,0 +1,27 @@
+<!-- index.wxml -->
+<view class="container">
+    <view style="height: {{statusBarHeight}}px" class="statusBar"></view>
+    <view class="header" style="top: {{statusBarHeight}}px">
+        <navigator class="navigator" url="../my/my" style="height: {{avatar}}px; width: {{avatar}}px;">
+            <image src="{{userInfo.avatarUrl}}" class="avatar" />
+        </navigator>
+    </view>
+    <view class="main" style="margin-top: calc({{avatar+statusBarHeight}}px + 18rpx); height: calc(100vh - ({{avatar+statusBarHeight}}px + 18rpx))">
+        <swiper bindchange="swiperChange" class='swiper' autoplay='true' interval='3000' duration='300' circular='true'>
+            <swiper-item wx:for="{{images}}" wx:key="index">
+                <image src="{{item.img}}" class="swiper-item" />
+            </swiper-item>
+        </swiper>
+        <view class="dots">
+            <view wx:for="{{images}}" wx:key="index" class="dot {{index == active ? 'active' : ''}}" />
+        </view>
+        <view class="btns fs30">
+            <navigator wx:for="{{option}}" wx:key="index" class="{{item.class}}" url="../orderInfo/orderInfo?title={{item.text}}">
+                {{item.text}}
+            </navigator>
+        </view>
+    </view>
+</view>
+<view wx:if="{{isAuthorize}}" class="layer">
+    <button open-type="getUserInfo" type="primary" bindgetuserinfo="bindGetUserInfo">点击授权</button>
+</view>

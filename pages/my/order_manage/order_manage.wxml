@@ -1,0 +1,28 @@
+<!-- pages/my/order_manage/order_manage.wxml -->
+<view class="container">
+    <view class="topTab">
+        <view wx:for="{{tab}}" bindtap="switchTab" data-index="{{index}}" wx:key="*this" class="tab {{tabIndex == index && 'active'}}">
+            {{item}}支付
+        </view>
+    </view>
+    <view class="order-wrapper">
+        <navigator wx:for="{{orderArr}}" wx:key="*this.orderid" url="order_details/order_details?orderid={{item.orderid}}" class="order-item">
+            <view class="title-box">
+                <text class="title-name fs26">{{item.code}}</text>
+                <text class="title-time fs24">{{item.addtime}}</text>
+            </view>
+            <view class="order-info">
+                <view class="order-info-text fs24">
+                    <view class="info-text">类型：{{item.name}}</view>
+                    <view class="info-text">活动开始时间：{{item.startime}}</view>
+                    <view class="info-text">支付方式：{{item.paymethod}}</view>
+                </view>
+                <view class="order-info-money text-center">
+                    <view class="money-number fs30">{{item.pay}} 元</view>
+                    <view class="money-describe fs22">(定金)</view>
+                </view>
+            </view>
+            <view class="address fs24">地址：{{item.address}}</view>
+        </navigator>
+    </view>
+</view>
