@@ -1,10 +1,3 @@
-function isInclude(arr, item) {
+module.exports.isInclude = function (arr, item) {
     return arr.indexOf(item) == -1 ? false : true
 }
-
-module.exports.replaceStr = function (str, rule) {
-    console.log(str.split(rule))
-    return str.split(rule);
-}
-
-module.exports = { isInclude: isInclude }

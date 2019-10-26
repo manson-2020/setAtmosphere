@@ -3,7 +3,7 @@
     <view style="height: {{statusBarHeight}}px" class="statusBar"></view>
     <view class="header" style="top: {{statusBarHeight}}px">
         <navigator class="navigator" url="../my/my" style="height: {{avatar}}px; width: {{avatar}}px;">
-            <image src="{{userInfo.avatarUrl}}" class="avatar" />
+            <image src="{{userInfo.avatar}}" class="avatar" />
         </navigator>
     </view>
     <view class="main" style="margin-top: calc({{avatar+statusBarHeight}}px + 18rpx); height: calc(100vh - ({{avatar+statusBarHeight}}px + 18rpx))">

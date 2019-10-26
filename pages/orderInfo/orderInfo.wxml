@@ -116,7 +116,7 @@
                             <input type="number" class="moneyNumber" bindinput="savaValue" value="{{inputReward}}" data-type="inputReward" placeholder="0.00" />
                             <text style="margin-left: 12rpx;">元</text>
                         </view>
-                        <view class="fs16 tips">
+                        <view class="fs18 tips">
                             <text class="division">|</text>
                             <view class="tips">
                                 <image class="emoji-kiss" src="../../images/emoji-kiss.png" />
@@ -138,9 +138,9 @@
                             <text>{{money}}</text>
                             <text>元</text>
                         </view>
-                        <view class="fs16 tips">
+                        <view class="fs18 tips">
                             <text class="division">|</text>
-                            <text class="fs16 tips">提前支付定金可以更快被商家接单哦</text>
+                            <text class="tips">提前支付定金可以更快被商家接单哦</text>
                         </view>
                     </view>
                 </view>

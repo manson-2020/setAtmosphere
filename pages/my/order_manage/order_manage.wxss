@@ -1,11 +1,13 @@
 /* pages/my/order_manage/order_manage.wxss */
 
 .topTab {
+    width: 100vw;
+    position: fixed;
     display: flex;
-    justify-content: space-between;
-    padding: 0 83rpx;
+    justify-content: space-around;
     background-color: #fff;
     align-items: center;
+    top: 0;
 }
 
 .tab {
@@ -67,4 +69,8 @@
 
 .info-text {
     margin-top: 18rpx;
+}
+
+.order-wrapper {
+    margin-top: 110rpx;
 }

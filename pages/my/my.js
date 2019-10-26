@@ -15,12 +15,11 @@ Page({
         personal_data: {}
     },
 
-    onLoad(options) {
+    onShow() {
         wx.apiRequest("/api/user/getinfo", {
             method: "post",
             data: { token: wx.getStorageSync("token") },
             complete: res => res.data.code == 200 && this.setData({ personal_data: res.data.data })
         })
-    },
-
+    }
 })

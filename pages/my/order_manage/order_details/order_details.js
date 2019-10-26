@@ -8,7 +8,8 @@ Page({
 
 
     onLoad(options) {
-        this.setData({ orderid: options.orderid })
+        this.setData({ orderid: options.orderid });
+
         wx.apiRequest("/api/user/orderDetail", {
             method: "post",
             data: { token: wx.getStorageSync("token"), orderid: options.orderid },

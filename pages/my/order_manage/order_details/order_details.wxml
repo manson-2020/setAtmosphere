@@ -2,7 +2,7 @@
 <view class="container">
     <view class="header white_color">
         <view class="header-title fs36">
-            <text>已付款</text>
+            <text>{{order_details.status == 0 ? '未' : '已'}}付款</text>
             <text class="ml70">{{order_details.code}}</text>
         </view>
         <view class="fs26 mt38">{{order_details.addtime}}</view>

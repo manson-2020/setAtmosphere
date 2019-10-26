@@ -21,6 +21,27 @@ Page({
         this.setData({ active: e.detail.current })
     },
 
+    getUserInfo() {
+        wx.getUserInfo({
+            success: res => {
+                app.globalData.userInfo = res.userInfo;
+                wx.apiRequest("/api/login/upinfo", {
+                    method: "post",
+                    data: {
+                        nickName: res.userInfo.nickName,
+                        avatarUrl: res.userInfo.avatarUrl,
+                        gender: res.userInfo.gender,
+                        token: wx.getStorageSync("token")
+                    },
+                    success: req => { this.setData({ userInfo: req.data.data }) }
+                });
+            }
+        });
+    },
+    onShow() {
+        this.getUserInfo();
+    },
+
     onLoad() {
         if (!app.globalData.statusBarHeight) {
             wx.getSystemInfo({
@@ -37,13 +58,9 @@ Page({
                 success: res => {
                     this.setData({ isAuthorize: !res.authSetting["scope.userInfo"] })
                 }
-            })
-            wx.getUserInfo({
-                success: res => {
-                    app.globalData.userInfo = res.userInfo
-                    this.setData({ userInfo: res.userInfo })
-                }
             });
+
+            this.getUserInfo();
         }
 
         wx.apiRequest("/api/home/banner", {
@@ -53,15 +70,11 @@ Page({
                 res.data.code == 200 && this.setData({ images: res.data.data.slice(0, 3) })
             }
         });
-
-
     },
 
     bindGetUserInfo(res) {
         if (res.detail.userInfo) {
-            // console.log("点击了同意授权");
             this.setData({ isAuthorize: false });
-
             wx.redirectTo({ url: "index" })
         } else {
             console.log("点击了拒绝授权");

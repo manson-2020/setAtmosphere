@@ -99,9 +99,10 @@ Page({
             }
         } else {
             if (!this.data.showOption) {
-                let imgsId = '';
+
+                let imgsId = [];
                 this.data.uploadImagePath.map(item => {
-                    imgsId += item.id + ','
+                    imgsId.push(item.id)
                 });
 
                 if (!!this.data.selectedOption.length && (this.data.area && this.data.area != "选择地区") && this.data.inputAddress && this.data.inputMinpay && this.data.inputMaxpay && (this.data.inputName || this.data.userInfo.username) && (this.data.inputNumber || this.data.userInfo.phone)) {
@@ -124,7 +125,7 @@ Page({
                                 tip: this.data.inputReward,
                                 pay: this.data.inputMinpay * this.data.discount,
                                 paymethod: this.data.paymethod == "线下付款" ? 2 : 1,
-                                imgs: this.data.title == "找专业人士" ? null : this.data.uploadImagePath.toString()
+                                imgs: this.data.title == "找专业人士" ? null : imgsId.toString()
                             },
                             success: res => {
                                 if (res.data.data.paymethod == 1) {
@@ -144,7 +145,7 @@ Page({
                                                         icon: 'success',
                                                         duration: 1200
                                                     });
-                                                    setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage' }) }, 1200)
+                                                    setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=0' }) }, 1200)
                                                 }
                                             });
                                         },
@@ -158,7 +159,7 @@ Page({
                                         icon: 'success',
                                         duration: 1200
                                     });
-                                    setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage' }) }, 1200)
+                                    setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=1' }) }, 1200)
                                 }
                             }
                         })

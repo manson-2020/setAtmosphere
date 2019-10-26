@@ -7,10 +7,10 @@ Page({
     },
 
     switchPicture(e) {
-        if (e.currentTarget.dataset.type == "next") {
-            this.setData({ imgSrc: imgArr[0] });
+        if (e.currentTarget.dataset.type == "previous") {
+            this.setData({ imgSrc: this.data.imgArr[0].url });
         } else {
-            this.setData({ imgSrc: imgArr[1] });
+            this.data.imgArr[1] && this.setData({ imgSrc: this.data.imgArr[1].url });
         }
     },
 
@@ -19,7 +19,7 @@ Page({
         wx.apiRequest("/api/user/orderDetail", {
             method: "post",
             data: { token: wx.getStorageSync("token"), orderid: options.orderid },
-            success: res => { console.log(res.data.data.imgs[0].url); res.data.code == 200 && this.setData({ imgArr: res.data.data.imgs, imgSrc: res.data.data.imgs[0].url }) }
+            success: res => res.data.code == 200 && this.setData({ imgArr: res.data.data.imgs, imgSrc: res.data.data.imgs[0].url })
         })
     },
 
