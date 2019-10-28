@@ -46,7 +46,9 @@ Page({
 
 
     savaSubmit(e) {
-        this.data.personal_data.address = this.data.personal_data.area.toString() + "-" + this.data.personal_data.address;
+        let [address, area] = [this.data.personal_data.address, this.data.personal_data.area]
+        this.data.personal_data.address = area.toString() != "选择地区" ? area.toString() + "-" + address : "";
+        
         wx.apiRequest("/api/user/upinfo", {
             method: "post",
             data: { token: wx.getStorageSync("token"), ...this.data.personal_data },

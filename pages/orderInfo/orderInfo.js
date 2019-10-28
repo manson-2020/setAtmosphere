@@ -154,11 +154,11 @@ Page({
                                         }
                                     })
                                 } else {
-                                    wx.showToast({
-                                        title: "下单成功！",
-                                        icon: 'success',
-                                        duration: 1200
-                                    });
+                                        wx.showToast({
+                                            title: "下单成功！",
+                                            icon: 'success',
+                                            duration: 1200
+                                        });
                                     setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=1' }) }, 1200)
                                 }
                             }

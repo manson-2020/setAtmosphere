@@ -2,11 +2,12 @@
 <view class="container">
     <view class="banner">
         <Header title="我的" fontColor="#fff" backgroundColor="transparent" />
-        <view class="banner-main">
+        <view class="banner-main" bindtap="login">
             <image class="avatar" src="{{personal_data.avatar || '../../images/avatar.png'}}" />
-            <view class="user-text">
+            <view wx:if="{{!personal_data.nickname}}" class="text-title">点击登录账户</view>
+            <view wx:else class="user-text">
                 <view class="text-title fs34">{{personal_data.nickname}}</view>
-                <view class="text-describe fs20">{{personal_data.phone}}</view>
+                <view class="text-describe fs20">{{personal_data.address}}</view>
             </view>
         </view>
     </view>
@@ -18,16 +19,27 @@
             </view>
         </view>
         <view class="my-list">
-            <navigator wx:for="{{options}}" url="{{item.name}}/{{item.name}}" wx:key="*this.title" class="list-item">
+            <view wx:for="{{options}}" bindtap="goto" data-url="{{item.name}}/{{item.name}}" wx:key="*this.title" class="list-item">
                 <image class="icon-all" src="../../images/icon-{{item.name}}.png" />
                 <text class="list-name fs30">{{item.title}}</text>
                 <image class="icon-right" src="../../images/icon-right.png" />
-            </navigator>
+            </view>
             <navigator open-type="navigateBack" class="list-item">
                 <image class="icon-all" src="../../images/icon-sign_out.png" />
-                <text class="list-name fs30">退出登录</text>
+                <text class="list-name fs30">返回主页</text>
                 <image class="icon-right" src="../../images/icon-right.png" />
             </navigator>
+        </view>
+    </view>
+</view>
+<view wx:if="{{isLogin}}" class="layer">
+    <view class="layer-box">
+        <view class="tips-text">你还没登录，请登陆后再进行操作</view>
+        <view class="btn-wrapper">
+            <button class="cancle-btn" bindtap="cancle">暂不登录</button>
+            <button open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="signin-btn white_color">
+                立即登录
+            </button>
         </view>
     </view>
 </view>

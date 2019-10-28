@@ -93,15 +93,3 @@
   margin-left: 22rpx;
   box-shadow: 0 12rpx 12rpx #ccc;
 }
-
-.layer {
-  position: absolute;
-  top: 0;
-  z-index: 99999;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

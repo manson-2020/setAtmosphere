@@ -98,3 +98,56 @@ page {
     width: 18rpx;
     height: 31rpx;
 }
+
+.button {
+    display: inline-block;
+    background: transparent;
+}
+
+.layer {
+    position: absolute;
+    top: 0;
+    z-index: 99999;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.layer-box{
+    background-color: #fff;
+    padding: 30rpx;
+    border-radius: 15rpx;
+}
+
+.tips-text{
+    margin-top: 30rpx;
+}
+
+.btn-wrapper {
+    display: flex;
+    margin-top: 36rpx;
+    justify-content: space-around;
+}
+
+.cancle-btn {
+    background-color: #fff;
+}
+
+.cancle-btn::after {
+    border-radius: 20px;
+    border: 1px solid #006FFF;
+}
+
+.cancle-btn, .signin-btn{
+    border-radius: 20rpx;
+    font-size: 30rpx;
+}
+
+.signin-btn {
+    background-color: #006FFF;
+}
+
