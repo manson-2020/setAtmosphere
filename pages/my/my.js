@@ -41,15 +41,6 @@ Page({
         }
     },
 
-    goto(e) {
-        if (!this.data.personal_data.nickname) {
-            this.setData({ isLogin: true })
-        } else {
-            console.log(e)
-            wx.navigateTo({ url: e.currentTarget.dataset.url })
-        }
-    },
-
     login() {
         if (!this.data.personal_data.nickname) {
             this.setData({ isLogin: true })

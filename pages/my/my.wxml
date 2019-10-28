@@ -19,11 +19,11 @@
             </view>
         </view>
         <view class="my-list">
-            <view wx:for="{{options}}" bindtap="goto" data-url="{{item.name}}/{{item.name}}" wx:key="*this.title" class="list-item">
+            <navigator wx:for="{{options}}" url="{{item.name}}/{{item.name}}" wx:key="*this.title" class="list-item">
                 <image class="icon-all" src="../../images/icon-{{item.name}}.png" />
                 <text class="list-name fs30">{{item.title}}</text>
                 <image class="icon-right" src="../../images/icon-right.png" />
-            </view>
+            </navigator>
             <navigator open-type="navigateBack" class="list-item">
                 <image class="icon-all" src="../../images/icon-sign_out.png" />
                 <text class="list-name fs30">返回主页</text>
