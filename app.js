@@ -3,12 +3,14 @@
 import "./utils/util";
 
 App({
+
     onShow() {
         wx.getSystemInfo({
             success: res => {
                 this.globalData.statusBarHeight = res.statusBarHeight;
             }
         })
+
         // 登录
         wx.login({
             success: res => {
@@ -20,8 +22,9 @@ App({
                     }
                 })
             },
-        })
+        });
     },
+
 
     globalData: {
         statusBarHeight: 0,

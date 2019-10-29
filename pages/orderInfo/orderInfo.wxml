@@ -54,7 +54,7 @@
                 </view>
                 <view class="value fs26">
                     <view class="value-box">
-                        <picker mode="region" data-type="area" bindchange="savaValue">
+                        <picker mode="region" data-type="area" value="{{curAddress}}" bindchange="savaValue">
                             <view class="picker">
                                 <text class="area">{{area}}</text>
                                 <image class="icon-down" src="../../images/icon-down.png" />

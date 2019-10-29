@@ -1,7 +1,9 @@
-// components/orderInfo.js
+// pages/orderInfo.js
 
+import QQMapWX from "../../utils/qqmap-wx-jssdk";
 const app = getApp();
 const now = new Date();
+let qqmapsdk;
 
 Page({
 
@@ -16,6 +18,7 @@ Page({
         date: now.toLocaleString().replace(/\//g, '-').split(" ")[0].replace(",", ""),
         time: `${now.getHours() < 10 ? '0' + now.getHours() : now.getHours()}:${now.getMinutes() < 10 ? '0' + now.getMinutes() : now.getMinutes()}`,
         area: "选择地区",
+        curAddress: [],
         selectedOption: [],
         paymethod: "马上支付(微信)",
         menu: "线下付款",
@@ -24,14 +27,14 @@ Page({
         inputRemarkCount: 0,
         inputNeedDescriptionCount: 0,
         money: '0.00',
-        inputName: null,
-        inputNumber: null,
-        inputAddress: null,
-        inputKeyword: null,
-        inputNeedDescription: null,
-        inputRemark: null,
-        inputMinpay: null,
-        inputReward: null,
+        inputName: '',
+        inputNumber: '',
+        inputAddress: '',
+        inputKeyword: '',
+        inputNeedDescription: '',
+        inputRemark: '',
+        inputMinpay: '',
+        inputReward: '',
         uploadImagePath: []
     },
 
@@ -154,11 +157,11 @@ Page({
                                         }
                                     })
                                 } else {
-                                        wx.showToast({
-                                            title: "下单成功！",
-                                            icon: 'success',
-                                            duration: 1200
-                                        });
+                                    wx.showToast({
+                                        title: "下单成功！",
+                                        icon: 'success',
+                                        duration: 1200
+                                    });
                                     setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=1' }) }, 1200)
                                 }
                             }
@@ -202,14 +205,48 @@ Page({
         this.setData({ selectedOption: e.detail.value, hasOther: e.detail.value.includes("其他") ? true : false });
     },
 
+    onShow() {
+        if (this.data.statusBarHeight) {
+            wx.getSystemInfo({
+                success: res => {
+                    this.setData({ statusBarHeight: res.statusBarHeight })
+                }
+            })
+        }
+
+
+        wx.getLocation({
+            altitude: false,
+            success: res => {
+                qqmapsdk.reverseGeocoder({
+                    location: {
+                        latitude: res.latitude,
+                        longitude: res.longitude
+                    },
+                    success: res => {
+                        this.setData({curAddress: [res.result.ad_info.province, res.result.ad_info.city, res.result.ad_info.district]})
+                    },
+                    fail(res) {
+                        wx.showToast({
+                            title: '解析地址错误',
+                            icon: 'loading',
+                            duration: 1000
+                        });
+                    },
+                })
+            }
+        });
+
+
+
+    },
 
     onLoad(options) {
 
-        wx.getSystemInfo({
-            success: res => {
-                this.setData({ statusBarHeight: res.statusBarHeight })
-            }
-        })
+        qqmapsdk = new QQMapWX({
+            key: 'LPQBZ-NIGL4-CSVUT-DET57-GPCQ2-SWFK3'
+        });
+
         this.setData({ title: options.title });
         wx.apiRequest("/api/need/config", {
             method: "post",

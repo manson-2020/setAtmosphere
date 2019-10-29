@@ -21,6 +21,13 @@ Page({
     },
 
     onShow() {
+        if (!this.data.statusBarHeight) {
+            wx.getSystemInfo({
+                success: res => {
+                    this.setData({ statusBarHeight: res.statusBarHeight })
+                }
+            })
+        }
         wx.apiRequest("/api/user/getinfo", {
             method: "post",
             data: { token: wx.getStorageSync("token") },
@@ -29,14 +36,6 @@ Page({
     },
 
     onLoad() {
-        if (!app.globalData.statusBarHeight) {
-            wx.getSystemInfo({
-                success: res => {
-                    this.setData({ statusBarHeight: res.statusBarHeight })
-                }
-            })
-        }
-
         wx.apiRequest("/api/home/banner", {
             method: "post",
             data: { token: wx.getStorageSync("token") },

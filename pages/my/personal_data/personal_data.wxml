@@ -44,7 +44,7 @@
         <view class="item last">
             <text class="item-title">常住地址：</text>
             <view class="item-value">
-                <picker mode="region" bindchange="savaValue" data-type="area">
+                <picker mode="region" bindchange="savaValue" value="{{curAddress}}" data-type="area">
                     <view class="picker">
                         <text class="area fs24">{{personal_data.area}}</text>
                         <image class="icon-down" src="../../../images/icon-down.png" />

@@ -1,8 +1,13 @@
 // pages/my/personal_data/personal_data.js
+
+import QQMapWX from "../../../utils/qqmap-wx-jssdk";
+let qqmapsdk;
+
 Page({
 
     data: {
         personal_data: {},
+        curAddress: [],
     },
 
     savaValue(e) {
@@ -48,7 +53,7 @@ Page({
     savaSubmit(e) {
         let [address, area] = [this.data.personal_data.address, this.data.personal_data.area]
         this.data.personal_data.address = area.toString() != "选择地区" ? area.toString() + "-" + address : "";
-        
+
         wx.apiRequest("/api/user/upinfo", {
             method: "post",
             data: { token: wx.getStorageSync("token"), ...this.data.personal_data },
@@ -68,6 +73,10 @@ Page({
     },
 
     onLoad(options) {
+        qqmapsdk = new QQMapWX({
+            key: 'LPQBZ-NIGL4-CSVUT-DET57-GPCQ2-SWFK3'
+        });
+
         wx.apiRequest("/api/user/getinfo", {
             method: "post",
             data: { token: wx.getStorageSync("token") },
@@ -78,4 +87,28 @@ Page({
             }
         })
     },
+
+    onShow() {
+        wx.getLocation({
+            altitude: false,
+            success: res => {
+                qqmapsdk.reverseGeocoder({
+                    location: {
+                        latitude: res.latitude,
+                        longitude: res.longitude
+                    },
+                    success: res => {
+                        this.setData({ curAddress: [res.result.ad_info.province, res.result.ad_info.city, res.result.ad_info.district] })
+                    },
+                    fail(res) {
+                        wx.showToast({
+                            title: '解析地址错误',
+                            icon: 'loading',
+                            duration: 1000
+                        });
+                    },
+                })
+            }
+        });
+    }
 })

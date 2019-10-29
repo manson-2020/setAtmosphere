@@ -23,7 +23,7 @@ Page({
         })
     },
     onLoad(options) {
-        this.setData({ tabIndex: options.isPay });
+        this.setData({ tabIndex: options.isPay || 0 });
         this.apiRequest(this.data.tabIndex);
     }
 })

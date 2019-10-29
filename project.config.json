@@ -21,7 +21,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.9.0",
+	"libVersion": "2.8.3",
 	"appid": "wx279a1b80b0d51bbe",
 	"projectname": "setAtmosphere",
 	"debugOptions": {
