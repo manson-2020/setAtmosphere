@@ -186,6 +186,9 @@
                         <text class="phone-number fs24">{{userInfo.phone}}</text>
                     </view>
                 </view>
+                <text wx:if="{{userInfo.weixin}}" class="address-text fs24">
+                    微信号：{{userInfo.weixin}}
+                </text>
                 <text wx:if="{{userInfo.address}}" class="address-text fs22 gray_color">
                     地址：{{userInfo.address}}
                 </text>
@@ -209,6 +212,10 @@
         <label class="modal-item">
             <text class="title-text">电话号码：</text>
             <input type="number" placeholder="请输入电话号码" bindinput="savaValue" value="{{inputNumber}}" data-type="inputNumber" />
+        </label>
+        <label class="modal-item">
+            <text class="title-text">微信号：</text>
+            <input placeholder="请输入微信号码" bindinput="savaValue" value="{{inputWechat}}" data-type="inputWechat" />
         </label>
     </modal>
 </view>

@@ -26,7 +26,7 @@
             </navigator>
             <navigator open-type="navigateBack" class="list-item">
                 <image class="icon-all" src="../../images/icon-sign_out.png" />
-                <text class="list-name fs30">返回主页</text>
+                <text class="list-name fs34" style="font-weight: 600">返回主页</text>
                 <image class="icon-right" src="../../images/icon-right.png" />
             </navigator>
         </view>

@@ -88,7 +88,7 @@ Page({
 
     modalSubmit(e) {
         if (e.type == "confirm") {
-            this.setData({ userInfo: { username: this.data.inputName, phone: this.data.inputNumber } })
+            this.setData({ userInfo: { username: this.data.inputName, phone: this.data.inputNumber, weixin: this.data.inputWechat } })
         }
         this.setData({ showModal: true })
     },
@@ -117,6 +117,7 @@ Page({
                                 token: wx.getStorageSync("token"),
                                 username: this.data.inputName || this.data.userInfo.username,
                                 phone: this.data.inputNumber || this.data.userInfo.phone,
+                                weixin: this.data.inputWechat,
                                 address: this.data.area + "-" + this.data.inputAddress,
                                 startime: this.data.date + "-" + this.data.time,
                                 need: this.data.selectedOption.toString() + this.data.inputKeyword,
@@ -143,12 +144,16 @@ Page({
                                                 method: "post",
                                                 data: { token: wx.getStorageSync("token"), orderid: res.data.data.orderid },
                                                 complete: res => {
-                                                    wx.showToast({
-                                                        title: "支付成功！",
-                                                        icon: 'success',
-                                                        duration: 1200
-                                                    });
-                                                    setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=0' }) }, 1200)
+                                                    if (res.data.code == 200) {
+                                                        wx.showToast({
+                                                            title: this.data.title == "找专业人士" ? "支付成功！" : "付款成功! 请稍等正在为您匹配对应位置的商家",
+                                                            icon: 'success',
+                                                            duration: 5000,
+                                                            success: res => setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=0' }) }, 5000)
+                                                        });
+                                                    } else {
+                                                        wx.showToast({ title: "下单失败！", icon: "none", duration: 1200 })
+                                                    }
                                                 }
                                             });
                                         },
@@ -224,7 +229,7 @@ Page({
                         longitude: res.longitude
                     },
                     success: res => {
-                        this.setData({curAddress: [res.result.ad_info.province, res.result.ad_info.city, res.result.ad_info.district]})
+                        this.setData({ curAddress: [res.result.ad_info.province, res.result.ad_info.city, res.result.ad_info.district] })
                     },
                     fail(res) {
                         wx.showToast({

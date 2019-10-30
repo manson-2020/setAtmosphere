@@ -38,9 +38,8 @@ Page({
     onLoad() {
         wx.apiRequest("/api/home/banner", {
             method: "post",
-            data: { token: wx.getStorageSync("token") },
             success: res => {
-                res.data.code == 200 && this.setData({ images: res.data.data.slice(0, 3) })
+                this.setData({ images: res.data.data.slice(0, 3) })
             }
         });
     }

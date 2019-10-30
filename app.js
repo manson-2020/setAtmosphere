@@ -4,6 +4,7 @@ import "./utils/util";
 
 App({
 
+
     onShow() {
         wx.getSystemInfo({
             success: res => {

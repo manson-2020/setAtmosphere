@@ -20,6 +20,10 @@
             <input placeholder-class="input-placeholder" bindinput="savaValue" data-type="phone" placeholder="请输入联系电话" value="{{personal_data.phone}}" />
         </view>
         <view class="item">
+            <text class="item-title">微信号：</text>
+            <input placeholder-class="input-placeholder" bindinput="savaValue" data-type="weixin" placeholder="请输入微信号" value="{{personal_data.weixin}}" />
+        </view>
+        <view class="item">
             <text class="item-title">出生日期：</text>
             <picker data-type="date" mode="date" bindchange="savaValue" data-type="birthday">
                 <view class="picker">
