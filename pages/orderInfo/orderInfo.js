@@ -132,43 +132,52 @@ Page({
                                 imgs: this.data.title == "找专业人士" ? null : imgsId.toString()
                             },
                             success: res => {
-                                if (res.data.data.paymethod == 1) {
-                                    wx.requestPayment({
-                                        'timeStamp': res.data.data.timeStamp.toString(),
-                                        'nonceStr': res.data.data.nonceStr,
-                                        'package': res.data.data.package,
-                                        'signType': 'MD5',
-                                        'paySign': res.data.data.paySign,
-                                        'success'(res) {
-                                            wx.apiRequest("/api/need/selectOrder", {
-                                                method: "post",
-                                                data: { token: wx.getStorageSync("token"), orderid: res.data.data.orderid },
-                                                complete: res => {
-                                                    if (res.data.code == 200) {
-                                                        wx.showToast({
-                                                            title: this.data.title == "找专业人士" ? "支付成功！" : "付款成功! 请稍等正在为您匹配对应位置的商家",
-                                                            icon: 'success',
-                                                            duration: 5000,
-                                                            success: res => setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=0' }) }, 5000)
-                                                        });
-                                                    } else {
-                                                        wx.showToast({ title: "下单失败！", icon: "none", duration: 1200 })
+                                if (res.data.code == 200) {
+                                    if (res.data.data.paymethod == 1) {
+                                        wx.requestPayment({
+                                            'timeStamp': res.data.data.timeStamp.toString(),
+                                            'nonceStr': res.data.data.nonceStr,
+                                            'package': res.data.data.package,
+                                            'signType': 'MD5',
+                                            'paySign': res.data.data.paySign,
+                                            'success'(res) {
+                                                wx.apiRequest("/api/need/selectOrder", {
+                                                    method: "post",
+                                                    data: { token: wx.getStorageSync("token"), orderid: res.data.data.orderid },
+                                                    complete: res => {
+                                                        if (res.data.code == 200) {
+                                                            wx.showToast({
+                                                                title: this.data.title == "找专业人士" ? "支付成功！" : "付款成功! 请稍等正在为您匹配对应位置的商家",
+                                                                icon: 'success',
+                                                                duration: 5000,
+                                                                success: res => setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=0' }) }, 5000)
+                                                            });
+                                                        } else {
+                                                            wx.showToast({ title: "下单失败！", icon: "none", duration: 1200 })
+                                                        }
                                                     }
-                                                }
-                                            });
-                                        },
-                                        'fail'(res) {
-                                            console.log('fail:' + JSON.stringify(res));
-                                        }
-                                    })
+                                                });
+                                            },
+                                            'fail'(res) {
+                                                wx.showToast({ title: "下单失败！", icon: "none", duration: 1200 })
+                                            }
+                                        })
+                                    } else {
+                                        wx.showToast({
+                                            title: "下单成功！",
+                                            icon: 'success',
+                                            duration: 1200
+                                        });
+                                        setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=1' }) }, 1200)
+                                    }
                                 } else {
                                     wx.showToast({
-                                        title: "下单成功！",
-                                        icon: 'success',
+                                        title: res.data.msg,
+                                        icon: 'none',
                                         duration: 1200
                                     });
-                                    setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=1' }) }, 1200)
                                 }
+
                             }
                         })
                     } else {
