@@ -66,6 +66,10 @@ input {
     font-size: 24rpx;
 }
 
+.radio-text{
+    margin-left: 11rpx;
+}
+
 .placeholder {
     margin-top: 36rpx;
 }

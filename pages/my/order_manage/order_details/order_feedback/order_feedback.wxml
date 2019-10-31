@@ -1,5 +1,5 @@
 <!-- pages/my/order_manage/order_details/order_feedback/order_feedback.wxml -->
-<view class="wrapper">
+<view wx:if="{{type == 'submit'}}" class="wrapper">
     <view class="order-feedback">
         <view class="title-box">
             <text class="title-name fs28">{{order_details.code}}</text>
@@ -21,5 +21,28 @@
             </view>
         </view>
     </view>
-    <view bindtap="submitFeedback" hover-class="hover-view" class="feedback-btn white_color text-center">提交反馈</view>
+    <view bindtap="submitFeedback" hover-class="hover-view" class="feedback-btn white_color text-center">
+        提交反馈
+    </view>
+</view>
+
+<view wx:else class="wrapper">
+    <view wx:for="{{order_list}}" wx:key="*this.id" class="order-feedback">
+        <view class="title-box">
+            <text class="title-name fs28">{{item.code}}</text>
+            <text class="title-time fs24">{{item.addtime}}</text>
+        </view>
+        <view class="option-item first fs24">
+            <view class="option-name">反馈意见:</view>
+            <view class="content" style="flex: 1">
+                <textarea disabled="{{true}}" value="{{item.text}}" maxlength="200" class="feedback-textarea" placeholder="请输入反馈意见"></textarea>
+            </view>
+        </view>
+        <view class="option-item fs24">
+            <view class="option-name">反馈图片:</view>
+            <view style="margin-left: 21rpx;">
+                <image wx:for="{{item.imgs}}" wx:key="index" src="{{item.url}}" class="uploadPicture" />
+            </view>
+        </view>
+    </view>
 </view>

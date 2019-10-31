@@ -20,8 +20,7 @@ Page({
         area: "选择地区",
         curAddress: [],
         selectedOption: [],
-        paymethod: "马上支付(微信)",
-        menu: "线下付款",
+        paymethod: 1,
         showOption: true,
         showModal: true,
         inputRemarkCount: 0,
@@ -110,7 +109,7 @@ Page({
 
                 if (!!this.data.selectedOption.length && (this.data.area && this.data.area != "选择地区") && this.data.inputAddress && this.data.inputMinpay && this.data.inputMaxpay && (this.data.inputName || this.data.userInfo.username) && (this.data.inputNumber || this.data.userInfo.phone)) {
 
-                    if (this.data.inputMinpay <= this.data.inputMaxpay) {
+                    if (Number(this.data.inputMinpay) <= Number(this.data.inputMaxpay)) {
                         wx.apiRequest("/api/need/order", {
                             method: "post",
                             data: {
@@ -128,7 +127,7 @@ Page({
                                 maxpay: this.data.inputMaxpay,
                                 tip: this.data.inputReward,
                                 pay: this.data.inputMinpay * this.data.discount,
-                                paymethod: this.data.paymethod == "线下付款" ? 2 : 1,
+                                paymethod: this.data.paymethod,
                                 imgs: this.data.title == "找专业人士" ? null : imgsId.toString()
                             },
                             success: res => {
@@ -140,15 +139,17 @@ Page({
                                             'package': res.data.data.package,
                                             'signType': 'MD5',
                                             'paySign': res.data.data.paySign,
-                                            'success'(res) {
+                                            'success': () => {
                                                 wx.apiRequest("/api/need/selectOrder", {
                                                     method: "post",
                                                     data: { token: wx.getStorageSync("token"), orderid: res.data.data.orderid },
                                                     complete: res => {
+                                                        console.log(res);
+
                                                         if (res.data.code == 200) {
                                                             wx.showToast({
-                                                                title: this.data.title == "找专业人士" ? "支付成功！" : "付款成功! 请稍等正在为您匹配对应位置的商家",
-                                                                icon: 'success',
+                                                                title: this.data.title == "找专业人士" ? "支付成功！" : "正在匹配附近商家",
+                                                                icon: 'loading',
                                                                 duration: 5000,
                                                                 success: res => setTimeout(() => { wx.redirectTo({ url: '../my/order_manage/order_manage?isPay=0' }) }, 5000)
                                                             });
@@ -202,15 +203,6 @@ Page({
         }
     },
 
-    selected() {
-        this.setData({ paymethod: this.data.menu, menu: this.data.paymethod });
-        this.hideMenu();
-    },
-
-    hideMenu() {
-        this.setData({ showMenu: false })
-    },
-
     showMenu() {
         this.setData({ showMenu: !this.data.showMenu })
     },
@@ -260,7 +252,6 @@ Page({
         qqmapsdk = new QQMapWX({
             key: 'LPQBZ-NIGL4-CSVUT-DET57-GPCQ2-SWFK3'
         });
-
         this.setData({ title: options.title });
         wx.apiRequest("/api/need/config", {
             method: "post",
@@ -268,11 +259,10 @@ Page({
             success: res => {
                 if (res.data.code == 200) {
                     this.setData({
-                        option: options.title == "专业人士" ? res.data.data.worker : res.data.data.business,
-                        discount: options.title == "专业人士" ? res.data.data.disWorker : res.data.data.disBusiness
+                        option: options.title == "找专业人士" ? res.data.data.worker : res.data.data.business,
+                        discount: options.title == "找专业人士" ? res.data.data.disWorker : res.data.data.disBusiness
                     })
                 } else {
-                    console.log(res.data.msg);
                 }
             }
         });

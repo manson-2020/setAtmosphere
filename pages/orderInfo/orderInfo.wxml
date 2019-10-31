@@ -1,6 +1,6 @@
 <!-- components/orderInfo.wxml -->
 <wxs module="common" src="../../utils/common.wxs"></wxs>
-<view class="container" bindtap="hideMenu">
+<view class="container">
     <Header title="{{title}}" backgroundColor="#fff" />
     <view class="main" style="margin-top: calc({{titleHeight+statusBarHeight}}px + 18rpx); min-height: calc(100vh - ({{titleHeight+statusBarHeight}}px + 18rpx))">
         <view wx:if="{{showOption}}" class="option">
@@ -152,13 +152,16 @@
                     <text class="name">支付方式：</text>
                 </view>
                 <view class="value">
-                    <view class="value-box inline-block" catchtap="showMenu">
-                        <text class="fs26">{{paymethod}}</text>
-                        <image src="../../images/icon-down.png" class="icon-down" />
-                    </view>
-                    <view class="drop-down-menu {{showMenu && 'showMenu'}}">
-                        <view bindtap="selected" class="menu-item fs26">{{menu}}</view>
-                    </view>
+                    <radio-group class="radio-group fs24" bindchange="savaValue" data-type="paymethod">
+                        <label class="radio-label">
+                            <radio value="1" checked="{{paymethod == 1}}" />
+                            <text class="radio-text">马上支付</text>
+                        </label>
+                        <label class="radio-label second">
+                            <radio value="2" checked="{{paymethod == 2}}" />
+                            <text class="radio-text">线下付款</text>
+                        </label>
+                    </radio-group>
                 </view>
             </view>
             <view class="line" />

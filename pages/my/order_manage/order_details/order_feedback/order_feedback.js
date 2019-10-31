@@ -2,9 +2,11 @@
 Page({
 
     data: {
-        order_details: [],
+        order_details: {},
         text: "",
-        uploadImagePath: []
+        uploadImagePath: [],
+        type: "",
+        order_list: []
     },
 
     submitFeedback() {
@@ -81,14 +83,25 @@ Page({
 
 
     onLoad(options) {
-        this.setData({ orderid: options.orderid })
-        wx.apiRequest("/api/user/orderDetail", {
-            method: "post",
-            data: {
-                token: wx.getStorageSync("token"),
-                orderid: options.orderid
-            },
-            success: res => { console.log(res.data); res.data.code == 200 && this.setData({ order_details: res.data.data }) }
-        })
+        this.setData({ orderid: options.orderid, type: options.type });
+        if (options.type == "submit") {
+            wx.apiRequest("/api/user/orderDetail", {
+                method: "post",
+                data: {
+                    token: wx.getStorageSync("token"),
+                    orderid: options.orderid
+                },
+                success: res => res.data.code == 200 && this.setData({ order_details: res.data.data })
+            });
+        } else {
+            wx.apiRequest("/api/user/feedback", {
+                method: "post",
+                data: {
+                    token: wx.getStorageSync("token"),
+                    orderid: options.orderid
+                },
+                success: res => res.data.code == 200 && this.setData({ order_list: res.data.data })
+            });
+        }
     },
 })

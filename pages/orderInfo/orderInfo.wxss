@@ -189,6 +189,10 @@
     transition: all .3s;
 }
 
+.radio-label.second{
+    margin-left: 45rpx;
+}
+
 .menu-item {
     padding: 10rpx 30rpx;
 }

@@ -6,10 +6,6 @@ page {
     background: #F8F8F8;
 }
 
-radio {
-    margin-right: 22rpx
-}
-
 radio .wx-radio-input {
     border-radius: 50%;
     width: 28rpx;

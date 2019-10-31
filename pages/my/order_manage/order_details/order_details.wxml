@@ -43,8 +43,10 @@
         </view>
     </view>
     <view class="submit-btn fs32 text-center">
-        <navigator class="seeFeedback">查看反馈</navigator>
-        <navigator url="order_feedback/order_feedback?orderid={{order_details.orderid}}" class="submitFeedback white_color">
+        <navigator url="order_feedback/order_feedback?orderid={{order_details.orderid}}&type=select" class="seeFeedback">
+            查看反馈
+        </navigator>
+        <navigator url="order_feedback/order_feedback?orderid={{order_details.orderid}}&type=submit" class="submitFeedback white_color">
             我要反馈
         </navigator>
     </view>
