@@ -3,4 +3,6 @@
 .container {
     width: 627rpx;
     margin: 57rpx auto 0;
+    line-height: 50rpx;
+    letter-spacing: 0.1rem;
 }
