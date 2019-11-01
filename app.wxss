@@ -26,17 +26,18 @@ radio .wx-radio-input.wx-radio-input-checked::before {
 }
 
 checkbox {
-    width: 20rpx;
-    height: 20rpx;
-    line-height: 20rpx;
+    width: 30rpx;
+    height: 30rpx;
+    line-height: 25rpx;
     margin-right: 15rpx;
 }
 
 /*checkbox 选项框大小  */
 
 checkbox .wx-checkbox-input {
-    width: 20rpx;
-    height: 20rpx;
+    width: 30rpx;
+    height: 30rpx;
+    line-height: 25rpx;
 }
 
 /*checkbox选中后样式  */
@@ -49,12 +50,12 @@ checkbox .wx-checkbox-input.wx-checkbox-input-checked {
 /*checkbox选中后图标样式  */
 
 checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
-    width: 20rpx;
-    height: 20rpx;
-    line-height: 20rpx;
+    width: 30rpx;
+    height: 30rpx;
+    line-height: 25rpx;
     text-align: center;
     font-weight: bold;
-    font-size: 20rpx;
+    font-size: 30rpx;
     color: #006FFF;
 }
 
