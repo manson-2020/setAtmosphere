@@ -39,7 +39,7 @@
     padding: 10rpx 0;
 }
 
-.keyword  {
+.keyword {
     margin-top: 11rpx;
 }
 
@@ -193,7 +193,7 @@
     transition: all .3s;
 }
 
-.radio-label.second{
+.radio-label.second {
     margin-left: 45rpx;
 }
 
